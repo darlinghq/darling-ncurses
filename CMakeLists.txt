@@ -7,6 +7,7 @@ set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -nostdlib")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ncurses/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ncurses/ncurses)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/gen)
 
 add_definitions(-D _XOPEN_SOURCE_EXTENDED=1)
 #add_definitions(-DTRACE)
@@ -22,6 +23,7 @@ set(DYLIB_CURRENT_VERSION "5.4.0")
 add_subdirectory(ncurses/ncurses)
 add_subdirectory(ncurses/menu)
 add_subdirectory(ncurses/panel)
+add_subdirectory(ncurses/form)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ncurses/progs)
 add_darling_executable(clear ncurses/progs/clear.c)
