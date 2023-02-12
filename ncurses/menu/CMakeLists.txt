@@ -18,11 +18,11 @@ set(menu_sources
 	m_item_nam.c
 	m_item_new.c
 	m_item_opt.c
-	m_items.c
 	m_item_top.c
 	m_item_use.c
 	m_item_val.c
 	m_item_vis.c
+	m_items.c
 	m_new.c
 	m_opts.c
 	m_pad.c
@@ -32,7 +32,6 @@ set(menu_sources
 	m_scale.c
 	m_spacing.c
 	m_sub.c
-	m_trace.c
 	m_userptr.c
 	m_win.c
 )

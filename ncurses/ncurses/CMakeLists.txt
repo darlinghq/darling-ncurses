@@ -8,8 +8,8 @@ endif(COMMAND cmake_policy)
 
 set(ncurses_sources
 	base/define_key.c
-	base/keybound.c
 	base/key_defined.c
+	base/keybound.c
 	base/keyok.c
 	base/legacy_coding.c
 	base/lib_addch.c
@@ -62,12 +62,12 @@ set(ncurses_sources
 	base/lib_scrollok.c
 	base/lib_scrreg.c
 	base/lib_set_term.c
+	base/lib_slk.c
+	base/lib_slkatr_set.c
 	base/lib_slkatrof.c
 	base/lib_slkatron.c
-	base/lib_slkatr_set.c
 	base/lib_slkatrset.c
 	base/lib_slkattr.c
-	base/lib_slk.c
 	base/lib_slkclear.c
 	base/lib_slkcolor.c
 	base/lib_slkinit.c
@@ -82,14 +82,12 @@ set(ncurses_sources
 	base/lib_wattron.c
 	base/lib_winch.c
 	base/lib_window.c
-	base/memmove.c
 	base/nc_panel.c
 	base/resizeterm.c
 	base/safe_sprintf.c
 	base/tries.c
 	base/use_window.c
 	base/version.c
-	base/vsscanf.c
 	base/wresize.c
 
 	tinfo/access.c
@@ -107,7 +105,6 @@ set(ncurses_sources
 	tinfo/entries.c
 	tinfo/free_ttype.c
 	tinfo/getenv_num.c
-	tinfo/hashed_db.c
 	tinfo/home_terminfo.c
 	tinfo/init_keytry.c
 	tinfo/lib_acs.c
@@ -139,16 +136,7 @@ set(ncurses_sources
 	tinfo/use_screen.c
 	tinfo/write_entry.c
 
-	#trace/lib_traceatr.c
-	#trace/lib_tracebits.c
 	trace/lib_trace.c
-	#trace/lib_tracechr.c
-	#trace/lib_tracedmp.c
-	#trace/lib_tracemse.c
-	#trace/trace_buf.c
-	#trace/trace_tries.c
-	#trace/trace_xnames.c
-	#trace/varargs.c
 	trace/visbuf.c
 
 	tty/hardscroll.c
@@ -158,7 +146,7 @@ set(ncurses_sources
 	tty/lib_twait.c
 	tty/lib_vidattr.c
 	tty/tty_update.c
-	
+
 	widechar/charable.c
 	widechar/lib_add_wch.c
 	widechar/lib_box_set.c
@@ -167,9 +155,9 @@ set(ncurses_sources
 	widechar/lib_get_wch.c
 	widechar/lib_get_wstr.c
 	widechar/lib_hline_set.c
-	widechar/lib_ins_wch.c
 	widechar/lib_in_wch.c
 	widechar/lib_in_wchnstr.c
+	widechar/lib_ins_wch.c
 	widechar/lib_inwstr.c
 	widechar/lib_key_name.c
 	widechar/lib_pecho_wchar.c
@@ -180,13 +168,14 @@ set(ncurses_sources
 	widechar/lib_wacs.c
 	widechar/lib_wunctrl.c
 
-	lib_keyname.c
-	lib_gen.c
-	names.c
-	base/codes.c
-	base/unctrl.c
-	base/comp_captab.c
-	base/fallback.c
+	../../gen/codes.c
+	../../gen/comp_captab.c
+	../../gen/expanded.c
+	../../gen/fallback.c
+	../../gen/lib_gen.c
+	../../gen/lib_keyname.c
+	../../gen/names.c
+	../../gen/unctrl.c
 )
 
 set(DYLIB_INSTALL_NAME "/usr/lib/libncurses.5.4.dylib")

@@ -7,7 +7,6 @@ endif(COMMAND cmake_policy)
 
 set(panel_sources
 	p_above.c
-	panel.c
 	p_below.c
 	p_bottom.c
 	p_delete.c
@@ -21,6 +20,7 @@ set(panel_sources
 	p_update.c
 	p_user.c
 	p_win.c
+	panel.c
 )
 
 set(DYLIB_INSTALL_NAME "/usr/lib/libpanel.5.4.dylib")
