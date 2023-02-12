@@ -50,4 +50,4 @@ InstallSymlink(infotocap ${CMAKE_INSTALL_PREFIX}/libexec/darling/usr/bin/tic)
 
 install(TARGETS clear infocmp tic toe tput tset DESTINATION libexec/darling/usr/bin)
 
-install(DIRECTORY terminfo DESTINATION libexec/darling/usr/share)
+install(DIRECTORY gen/usr/share/terminfo DESTINATION libexec/darling/usr/share)
