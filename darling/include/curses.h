@@ -1,1 +1,1 @@
-../../ncurses/include/curses.h
+../../gen/curses.h
