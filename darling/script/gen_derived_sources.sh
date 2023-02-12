@@ -33,5 +33,8 @@ echo "Executing xcodescripts/derived_headers.sh"
 echo "Executing xcodescripts/derived_sources.sh"
 . "$PROJECT_DIR"/xcodescripts/derived_sources.sh
 
+# Based off of xcodescripts/install_headers.sh
+ln -s -f "curses.h" "$BUILT_PRODUCTS_DIR/ncurses.h"
+
 echo "Remove make_hash and make_keys executable"
 rm "$BUILT_PRODUCTS_DIR/make_hash" "$BUILT_PRODUCTS_DIR/make_keys"
