@@ -1,1 +1,1 @@
-../../include/nc_tparm.h
+../../ncurses/include/nc_tparm.h

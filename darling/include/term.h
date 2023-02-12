@@ -1,1 +1,1 @@
-../../include/term.h
+../../ncurses/include/term.h

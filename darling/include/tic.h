@@ -1,1 +1,1 @@
-../../include/tic.h
+../../ncurses/include/tic.h

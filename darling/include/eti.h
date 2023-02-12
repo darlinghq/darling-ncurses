@@ -1,1 +1,1 @@
-../../menu/eti.h
+../../ncurses/menu/eti.h

@@ -1,1 +1,1 @@
-../../include/unctrl.h
+../../ncurses/include/unctrl.h

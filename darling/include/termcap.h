@@ -1,1 +1,1 @@
-../../include/termcap.h
+../../ncurses/include/termcap.h

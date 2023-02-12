@@ -1,1 +1,1 @@
-../../include/panel.h
+../../ncurses/include/panel.h

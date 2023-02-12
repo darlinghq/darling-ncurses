@@ -1,1 +1,1 @@
-../../menu/menu.h
+../../ncurses/menu/menu.h

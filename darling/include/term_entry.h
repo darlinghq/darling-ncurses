@@ -1,1 +1,1 @@
-../../include/term_entry.h
+../../ncurses/include/term_entry.h

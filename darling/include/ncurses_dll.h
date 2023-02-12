@@ -1,1 +1,1 @@
-../../include/ncurses_dll.h
+../../ncurses/include/ncurses_dll.h
