@@ -15,7 +15,13 @@ add_definitions(-D _XOPEN_SOURCE_EXTENDED=1)
 # Hide warnings
 add_definitions(
 	-Wno-format-security
+	# Apple marks the private functions added in ncurses-79 as macOS 14+.
+	-Wno-unguarded-availability-new
 )
+
+# The libraries build with the base (5.4) ABI declarations from curses.h, as
+# xcodeconfig/libraries.xcconfig does; nc_abi.c undefines it for the newer ABI.
+set(NCURSES_LIBRARY_DEFINITIONS NCURSES_WANT_BASEABI _NCURSES_LIBBUILD)
 
 set(DYLIB_COMPAT_VERSION "5.4.0")
 set(DYLIB_CURRENT_VERSION "5.4.0")
@@ -34,16 +40,21 @@ add_darling_object_library(nc_dump_entry ncurses/progs/dump_entry.c)
 add_darling_executable(infocmp ncurses/progs/infocmp.c $<TARGET_OBJECTS:nc_dump_entry>)
 target_link_libraries(infocmp ncurses)
 
-add_darling_executable(tic ncurses/progs/tic.c $<TARGET_OBJECTS:nc_dump_entry>)
+add_darling_object_library(nc_tparm_type ncurses/progs/tparm_type.c)
+add_darling_object_library(nc_transform ncurses/progs/transform.c)
+
+add_darling_executable(tic ncurses/progs/tic.c $<TARGET_OBJECTS:nc_dump_entry>
+	$<TARGET_OBJECTS:nc_tparm_type> $<TARGET_OBJECTS:nc_transform>)
 target_link_libraries(tic ncurses)
 
 add_darling_executable(toe ncurses/progs/toe.c)
 target_link_libraries(toe ncurses)
 
-add_darling_executable(tput ncurses/progs/tput.c)
+add_darling_executable(tput ncurses/progs/tput.c
+	$<TARGET_OBJECTS:nc_tparm_type> $<TARGET_OBJECTS:nc_transform>)
 target_link_libraries(tput ncurses)
 
-add_darling_executable(tset ncurses/progs/tset.c)
+add_darling_executable(tset ncurses/progs/tset.c $<TARGET_OBJECTS:nc_transform>)
 target_link_libraries(tset ncurses)
 
 InstallSymlink(tset ${CMAKE_INSTALL_PREFIX}/libexec/darling/usr/bin/reset)

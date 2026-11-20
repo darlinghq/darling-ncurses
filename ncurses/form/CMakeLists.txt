@@ -44,6 +44,7 @@ set(form_sources
     fty_alnum.c
     fty_alpha.c
     fty_enum.c
+    fty_generic.c
     fty_int.c
     fty_ipv4.c
     fty_num.c
@@ -52,6 +53,7 @@ set(form_sources
 
 set(DYLIB_INSTALL_NAME "/usr/lib/libform.5.4.dylib")
 add_darling_library(form SHARED ${form_sources})
+target_compile_definitions(form PRIVATE ${NCURSES_LIBRARY_DEFINITIONS})
 target_link_libraries(form system ncurses)
 set_target_properties(form PROPERTIES OUTPUT_NAME "form.5.4")
 make_fat(form)

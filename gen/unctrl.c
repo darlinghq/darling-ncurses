@@ -3,15 +3,9 @@
 #include <curses.priv.h>
 #include <ctype.h>
 
-#if USE_WIDEC_SUPPORT
-#if HAVE_WCTYPE_H
-#include <wctype.h>
-#endif
-#endif
-
 #undef unctrl
 
-NCURSES_EXPORT(NCURSES_CONST char *) _nc_unctrl (SCREEN *sp, chtype ch)
+NCURSES_EXPORT(NCURSES_CONST char *) safe_unctrl(SCREEN *sp, chtype ch)
 {
 static const short unctrl_table[] = {
        0,   3,   6,   9,  12,  15,  18,  21,
@@ -119,7 +113,7 @@ static const char unctrl_blob[] =
     "\370\0\371\0\372\0\373\0\374\0\375\0\376\0\377\0"
 ;
 
-	int check = ChCharOf(ch);
+	int check = (int) ChCharOf(ch);
 	const char *result;
 
 	if (check >= 0 && check < (int)SIZEOF(unctrl_table)) {
@@ -130,16 +124,6 @@ static const char unctrl_blob[] =
 		 && (check < 160))
 			result = unctrl_blob + unctrl_c1[check - 128];
 		else
-#if USE_WIDEC_SUPPORT
-		if ((check >= 160)
-		 && (check < 256)
-		 && ((sp != 0)
-		  && ((sp->_legacy_coding > 0)
-		   || (sp->_legacy_coding == 0
-		       && (isprint(check) || iswprint(check))))))
-			result = unctrl_blob + unctrl_c1[check - 128];
-		else
-#else
 		if ((check >= 160)
 		 && (check < 256)
 		 && ((sp != 0)
@@ -148,7 +132,6 @@ static const char unctrl_blob[] =
 		       && isprint(check)))))
 			result = unctrl_blob + unctrl_c1[check - 128];
 		else
-#endif /* USE_WIDEC_SUPPORT */
 #endif /* NCURSES_EXT_FUNCS */
 			result = unctrl_blob + unctrl_table[check];
 	} else {
@@ -159,5 +142,5 @@ static const char unctrl_blob[] =
 
 NCURSES_EXPORT(NCURSES_CONST char *) unctrl (chtype ch)
 {
-	return _nc_unctrl(SP, ch);
+	return safe_unctrl(CURRENT_SCREEN, ch);
 }

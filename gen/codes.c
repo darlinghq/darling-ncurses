@@ -7,8 +7,6 @@
 
 #if BROKEN_LINKER || USE_REENTRANT
 
-#include <term.h>
-
 static const char _nc_code_blob[] = 
 "bw\0" "am\0" "xb\0" "xs\0" "xn\0" "eo\0" "gn\0" "hc\0" "km\0" "hs\0" "in\0" \
 "da\0" "db\0" "mi\0" "ms\0" "os\0" "es\0" "xt\0" "hz\0" "ul\0" "xo\0" "nx\0" \
@@ -52,7 +50,7 @@ static const char _nc_code_blob[] =
 "AF\0" "AB\0" "xl\0" "dv\0" "ci\0" "s0\0" "s1\0" "s2\0" "s3\0" "ML\0" "MT\0" \
 "Xy\0" "Zz\0" "Yv\0" "Yw\0" "Yx\0" "Yy\0" "Yz\0" "YZ\0" "S1\0" "S2\0" "S3\0" \
 "S4\0" "S5\0" "S6\0" "S7\0" "S8\0" "Xh\0" "Xl\0" "Xo\0" "Xr\0" "Xt\0" "Xv\0" \
-"sA\0" "sL\0" "i2\0" "rs\0" "ug\0" "bs\0" "ns\0" "nc\0" "dC\0" "dN\0" "nl\0" \
+"sA\0" "YI\0" "i2\0" "rs\0" "ug\0" "bs\0" "ns\0" "nc\0" "dC\0" "dN\0" "nl\0" \
 "bc\0" "MT\0" "NL\0" "dB\0" "dT\0" "kn\0" "ko\0" "ma\0" "pt\0" "xr\0" "G2\0" \
 "G3\0" "G1\0" "G4\0" "GR\0" "GL\0" "GU\0" "GD\0" "GH\0" "GV\0" "GC\0" "ml\0" \
 "mu\0" "bx\0" ;
@@ -121,20 +119,31 @@ alloc_array(NCURSES_CONST char ***value, const short *offsets, unsigned size)
 		if ((*value = typeCalloc(NCURSES_CONST char *, size + 1)) != 0) {
 			unsigned n;
 			for (n = 0; n < size; ++n) {
-				(*value)[n] = _nc_code_blob + offsets[n];
+				(*value)[n] = (NCURSES_CONST char *) _nc_code_blob + offsets[n];
 			}
 		}
 	}
 	return *value;
 }
 
-#define FIX(it) NCURSES_IMPEXP IT * NCURSES_API _nc_##it(void) { return alloc_array(&ptr_##it, _nc_offset_##it, SIZEOF(_nc_offset_##it)); }
+#define FIX(it) NCURSES_IMPEXP IT * NCURSES_API NCURSES_PUBLIC_VAR(it)(void) { return alloc_array(&ptr_##it, _nc_offset_##it, SIZEOF(_nc_offset_##it)); }
 
+/* remove public definition which conflicts with FIX() */
+#undef boolcodes
+#undef numcodes
+#undef strcodes
+
+/* add local definition */
 FIX(boolcodes)
 FIX(numcodes)
 FIX(strcodes)
 
+/* restore the public definition */
+
 #define FREE_FIX(it) if (ptr_##it) { FreeAndNull(ptr_##it); }
+#define boolcodes  NCURSES_PUBLIC_VAR(boolcodes())
+#define numcodes   NCURSES_PUBLIC_VAR(numcodes())
+#define strcodes   NCURSES_PUBLIC_VAR(strcodes())
 
 #if NO_LEAKS
 NCURSES_EXPORT(void)
@@ -637,7 +646,7 @@ DCL(strcodes) = {
 		"Xt",
 		"Xv",
 		"sA",
-		"sL",
+		"YI",
 		"i2",
 		"rs",
 		"nl",

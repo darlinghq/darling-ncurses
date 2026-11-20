@@ -82,6 +82,7 @@ set(ncurses_sources
 	base/lib_wattron.c
 	base/lib_winch.c
 	base/lib_window.c
+	base/nc_abi.c
 	base/nc_panel.c
 	base/resizeterm.c
 	base/safe_sprintf.c
@@ -127,6 +128,7 @@ set(ncurses_sources
 	tinfo/lib_tputs.c
 	tinfo/lib_ttyflags.c
 	tinfo/name_match.c
+	tinfo/obsolete.c
 	tinfo/parse_entry.c
 	tinfo/read_entry.c
 	tinfo/read_termcap.c
@@ -180,6 +182,7 @@ set(ncurses_sources
 
 set(DYLIB_INSTALL_NAME "/usr/lib/libncurses.5.4.dylib")
 add_darling_library(ncurses SHARED ${ncurses_sources})
+target_compile_definitions(ncurses PRIVATE ${NCURSES_LIBRARY_DEFINITIONS})
 target_link_libraries(ncurses system)
 set_target_properties(ncurses PROPERTIES OUTPUT_NAME "ncurses.5.4")
 make_fat(ncurses)

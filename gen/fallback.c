@@ -3,7 +3,6 @@
  */
 
 #include <curses.priv.h>
-#include <term.h>
 
 NCURSES_EXPORT(const TERMTYPE *) _nc_fallback (const char *name GCC_UNUSED)
 {

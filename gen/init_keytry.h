@@ -33,7 +33,6 @@ const struct tinfo_fkeys _nc_tinfo_fkeys[] = {
 	{   64, KEY_EOS          },	/* key_eos */
 	{  166, KEY_EXIT         },	/* key_exit */
 	{   65, KEY_F(0)         },	/* key_f0 */
-	{   66, KEY_F(1)         },	/* key_f1 */
 	{   67, KEY_F(10)        },	/* key_f10 */
 	{  216, KEY_F(11)        },	/* key_f11 */
 	{  217, KEY_F(12)        },	/* key_f12 */
@@ -44,7 +43,7 @@ const struct tinfo_fkeys _nc_tinfo_fkeys[] = {
 	{  222, KEY_F(17)        },	/* key_f17 */
 	{  223, KEY_F(18)        },	/* key_f18 */
 	{  224, KEY_F(19)        },	/* key_f19 */
-	{   68, KEY_F(2)         },	/* key_f2 */
+	{   66, KEY_F(1)         },	/* key_f1 */
 	{  225, KEY_F(20)        },	/* key_f20 */
 	{  226, KEY_F(21)        },	/* key_f21 */
 	{  227, KEY_F(22)        },	/* key_f22 */
@@ -55,7 +54,7 @@ const struct tinfo_fkeys _nc_tinfo_fkeys[] = {
 	{  232, KEY_F(27)        },	/* key_f27 */
 	{  233, KEY_F(28)        },	/* key_f28 */
 	{  234, KEY_F(29)        },	/* key_f29 */
-	{   69, KEY_F(3)         },	/* key_f3 */
+	{   68, KEY_F(2)         },	/* key_f2 */
 	{  235, KEY_F(30)        },	/* key_f30 */
 	{  236, KEY_F(31)        },	/* key_f31 */
 	{  237, KEY_F(32)        },	/* key_f32 */
@@ -66,7 +65,7 @@ const struct tinfo_fkeys _nc_tinfo_fkeys[] = {
 	{  242, KEY_F(37)        },	/* key_f37 */
 	{  243, KEY_F(38)        },	/* key_f38 */
 	{  244, KEY_F(39)        },	/* key_f39 */
-	{   70, KEY_F(4)         },	/* key_f4 */
+	{   69, KEY_F(3)         },	/* key_f3 */
 	{  245, KEY_F(40)        },	/* key_f40 */
 	{  246, KEY_F(41)        },	/* key_f41 */
 	{  247, KEY_F(42)        },	/* key_f42 */
@@ -77,7 +76,7 @@ const struct tinfo_fkeys _nc_tinfo_fkeys[] = {
 	{  252, KEY_F(47)        },	/* key_f47 */
 	{  253, KEY_F(48)        },	/* key_f48 */
 	{  254, KEY_F(49)        },	/* key_f49 */
-	{   71, KEY_F(5)         },	/* key_f5 */
+	{   70, KEY_F(4)         },	/* key_f4 */
 	{  255, KEY_F(50)        },	/* key_f50 */
 	{  256, KEY_F(51)        },	/* key_f51 */
 	{  257, KEY_F(52)        },	/* key_f52 */
@@ -88,11 +87,12 @@ const struct tinfo_fkeys _nc_tinfo_fkeys[] = {
 	{  262, KEY_F(57)        },	/* key_f57 */
 	{  263, KEY_F(58)        },	/* key_f58 */
 	{  264, KEY_F(59)        },	/* key_f59 */
-	{   72, KEY_F(6)         },	/* key_f6 */
+	{   71, KEY_F(5)         },	/* key_f5 */
 	{  265, KEY_F(60)        },	/* key_f60 */
 	{  266, KEY_F(61)        },	/* key_f61 */
 	{  267, KEY_F(62)        },	/* key_f62 */
 	{  268, KEY_F(63)        },	/* key_f63 */
+	{   72, KEY_F(6)         },	/* key_f6 */
 	{   73, KEY_F(7)         },	/* key_f7 */
 	{   74, KEY_F(8)         },	/* key_f8 */
 	{   75, KEY_F(9)         },	/* key_f9 */
@@ -133,8 +133,8 @@ const struct tinfo_fkeys _nc_tinfo_fkeys[] = {
 	{  194, KEY_SEND         },	/* key_send */
 	{  195, KEY_SEOL         },	/* key_seol */
 	{  196, KEY_SEXIT        },	/* key_sexit */
-	{   84, KEY_SF           },	/* key_sf */
 	{  197, KEY_SFIND        },	/* key_sfind */
+	{   84, KEY_SF           },	/* key_sf */
 	{  198, KEY_SHELP        },	/* key_shelp */
 	{  199, KEY_SHOME        },	/* key_shome */
 	{  200, KEY_SIC          },	/* key_sic */
@@ -145,10 +145,10 @@ const struct tinfo_fkeys _nc_tinfo_fkeys[] = {
 	{  205, KEY_SOPTIONS     },	/* key_soptions */
 	{  206, KEY_SPREVIOUS    },	/* key_sprevious */
 	{  207, KEY_SPRINT       },	/* key_sprint */
-	{   85, KEY_SR           },	/* key_sr */
 	{  208, KEY_SREDO        },	/* key_sredo */
 	{  209, KEY_SREPLACE     },	/* key_sreplace */
 	{  210, KEY_SRIGHT       },	/* key_sright */
+	{   85, KEY_SR           },	/* key_sr */
 	{  211, KEY_SRSUME       },	/* key_srsume */
 	{  212, KEY_SSAVE        },	/* key_ssave */
 	{  213, KEY_SSUSPEND     },	/* key_ssuspend */

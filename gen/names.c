@@ -7,8 +7,6 @@
 
 #if BROKEN_LINKER || USE_REENTRANT
 
-#include <term.h>
-
 static const char _nc_name_blob[] = 
 "bw\0" "auto_left_margin\0" "am\0" "auto_right_margin\0" "xsb\0" "no_esc_ctlc\0" \
 "xhp\0" "ceol_standout_glitch\0" "xenl\0" "eat_newline_glitch\0" "eo\0" \
@@ -308,8 +306,17 @@ alloc_array(NCURSES_CONST char ***value, const short *offsets, unsigned size)
 	return *value;
 }
 
-#define FIX(it) NCURSES_IMPEXP IT * NCURSES_API _nc_##it(void) { return alloc_array(&ptr_##it, _nc_offset_##it, SIZEOF(_nc_offset_##it)); }
+#define FIX(it) NCURSES_IMPEXP IT * NCURSES_API NCURSES_PUBLIC_VAR(it)(void) { return alloc_array(&ptr_##it, _nc_offset_##it, SIZEOF(_nc_offset_##it)); }
 
+/* remove public definition which conflicts with FIX() */
+#undef boolnames
+#undef boolfnames
+#undef numnames
+#undef numfnames
+#undef strnames
+#undef strfnames
+
+/* add local definition */
 FIX(boolnames)
 FIX(boolfnames)
 FIX(numnames)
@@ -317,6 +324,13 @@ FIX(numfnames)
 FIX(strnames)
 FIX(strfnames)
 
+/* restore the public definition */
+#define boolnames  NCURSES_PUBLIC_VAR(boolnames())
+#define boolfnames NCURSES_PUBLIC_VAR(boolfnames())
+#define numnames   NCURSES_PUBLIC_VAR(numnames())
+#define numfnames  NCURSES_PUBLIC_VAR(numfnames())
+#define strnames   NCURSES_PUBLIC_VAR(strnames())
+#define strfnames  NCURSES_PUBLIC_VAR(strfnames())
 
 #define FREE_FIX(it) if (ptr_##it) { FreeAndNull(ptr_##it); }
 

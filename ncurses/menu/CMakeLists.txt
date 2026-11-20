@@ -38,6 +38,7 @@ set(menu_sources
 
 set(DYLIB_INSTALL_NAME "/usr/lib/libmenu.5.4.dylib")
 add_darling_library(menu SHARED ${menu_sources})
+target_compile_definitions(menu PRIVATE ${NCURSES_LIBRARY_DEFINITIONS})
 target_link_libraries(menu system ncurses)
 set_target_properties(menu PROPERTIES OUTPUT_NAME "menu.5.4")
 make_fat(menu)

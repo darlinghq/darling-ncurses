@@ -1295,6 +1295,7 @@ static const PredIdx str_termcap_sort[] = {
 	 390 ,	/*  Xt  */
 	 391 ,	/*  Xv  */
 	 370 ,	/*  Xy  */
+	 393 ,	/*  YI  */
 	 377 ,	/*  YZ  */
 	 372 ,	/*  Yv  */
 	 373 ,	/*  Yw  */
@@ -1486,7 +1487,6 @@ static const PredIdx str_termcap_sort[] = {
 	 366 ,	/*  s2  */
 	 367 ,	/*  s3  */
 	 392 ,	/*  sA  */
-	 393 ,	/*  sL  */
 	 131 ,	/*  sa  */
 	 128 ,	/*  sc  */
 	 43 ,	/*  se  */
@@ -1566,6 +1566,7 @@ static const bool bool_from_termcap[] = {
 	TRUE,	/*  OTNL  */
 	TRUE,	/*  OTpt  */
 	TRUE,	/*  OTxr  */
+#define OK_bool_from_termcap 43
 };
 
 static const bool num_from_termcap[] = {
@@ -1608,6 +1609,7 @@ static const bool num_from_termcap[] = {
 	TRUE,	/*  OTdB  */
 	TRUE,	/*  OTdT  */
 	FALSE,	/*  OTkn  */
+#define OK_num_from_termcap 37
 };
 
 static const bool str_from_termcap[] = {
@@ -2159,5 +2161,6 @@ static const bool str_from_termcap[] = {
 	FALSE,	/*  btml  */
 	FALSE,	/*  rvert  */
 	FALSE,	/*  lvert  */
+#define OK_str_from_termcap 399
 };
 

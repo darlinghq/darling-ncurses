@@ -281,7 +281,7 @@ static short const parametrized[] = {
 0,	/*  mgc  */
 0,	/*  smgl  */
 0,	/*  smgr  */
-0,	/*  fln  */
+-1,	/*  fln  */
 1,	/*  sclk  */
 0,	/*  dclk  */
 0,	/*  rmclk  */
