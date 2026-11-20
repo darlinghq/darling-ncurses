@@ -2,7 +2,7 @@
 
 ## Upstream URL
 
-https://github.com/apple-oss-distributions/ncurses/tree/ncurses-57
+https://github.com/apple-oss-distributions/ncurses/tree/ncurses-79
 
 ## Updating Source
 
