@@ -1,15 +1,37 @@
 # src/external/ncurses/xcodescripts/run_tic.sh
 PROJECT_DIR=$( cd ../.. ; pwd -P )
 BUILT_PRODUCTS_DIR="$PROJECT_DIR/gen"
+set -e
 
 # sh "$PROJECT_DIR"/xcodescripts/native_execs.sh -target tic_static
 mkdir -p "$BUILT_PRODUCTS_DIR/native"
+## DARLING
+# Builds tic_static (the Xcode project's native tic target) on the build host
+# and compiles the terminfo database with it, like xcodescripts/run_tic.sh.
+# On hosts other than macOS, supply what the sources take from Apple's
+# headers: <AvailabilityMacros.h>, the availability attributes and the BSD
+# fmtcheck() (tic only formats numbers with formats from terminfo.src).
+HOST_FLAGS=
+if [ "$(uname)" != Darwin ]; then
+    mkdir -p "$BUILT_PRODUCTS_DIR/native/include"
+    : > "$BUILT_PRODUCTS_DIR/native/include/AvailabilityMacros.h"
+    cat > "$BUILT_PRODUCTS_DIR/native/include/host_compat.h" <<EOF
+#define __OSX_AVAILABLE(v)
+#define __IOS_AVAILABLE(v)
+#define __WATCHOS_AVAILABLE(v)
+#define __TVOS_AVAILABLE(v)
+#define fmtcheck(fmt, def) (fmt)
+EOF
+    HOST_FLAGS="--include-directory $BUILT_PRODUCTS_DIR/native/include -include host_compat.h"
+fi
+## /DARLING
 clang \
     -o "$BUILT_PRODUCTS_DIR/native/tic_static" \
     --include-directory "$PROJECT_DIR/ncurses/include" \
     --include-directory "$PROJECT_DIR/ncurses/ncurses" \
     --include-directory "$PROJECT_DIR/ncurses/progs" \
     --include-directory "$PROJECT_DIR/gen" \
+    $HOST_FLAGS \
     -DHAVE_CONFIG_H \
     -D_XOPEN_SOURCE=600 \
     -D_XOPEN_SOURCE_EXTENDED \
@@ -43,6 +65,7 @@ clang \
     $PROJECT_DIR/ncurses/ncurses/tinfo/lib_raw.c \
     $PROJECT_DIR/ncurses/ncurses/tinfo/lib_setup.c \
     $PROJECT_DIR/ncurses/ncurses/tinfo/lib_termcap.c \
+    $PROJECT_DIR/ncurses/ncurses/tinfo/lib_ti.c \
     $PROJECT_DIR/ncurses/ncurses/tinfo/lib_tparm.c \
     $PROJECT_DIR/ncurses/ncurses/tinfo/lib_tputs.c \
     $PROJECT_DIR/ncurses/ncurses/tinfo/lib_ttyflags.c \
@@ -58,6 +81,8 @@ clang \
     $PROJECT_DIR/ncurses/ncurses/trace/visbuf.c \
     $PROJECT_DIR/ncurses/progs/dump_entry.c \
     $PROJECT_DIR/ncurses/progs/tic.c \
+    $PROJECT_DIR/ncurses/progs/tparm_type.c \
+    $PROJECT_DIR/ncurses/progs/transform.c \
     $BUILT_PRODUCTS_DIR/codes.c \
     $BUILT_PRODUCTS_DIR/comp_captab.c \
     $BUILT_PRODUCTS_DIR/fallback.c \
@@ -71,6 +96,11 @@ SRCROOT=$PROJECT_DIR
 mkdir -p $BUILT_PRODUCTS_DIR/usr/share/terminfo/
 
 cd $PROJECT_DIR/ncurses/misc
+## DARLING
+# run_tic.sh defaults to the host's /usr/bin/tic, which writes the database
+# in the host's layout (e.g. single-letter directories). Use tic_static.
+## /DARLING
+TIC_PATH="$BUILT_PRODUCTS_DIR/native/tic_static" \
 PATH="$BUILT_PRODUCTS_DIR/native:$PATH" \
 DESTDIR="$DSTROOT" \
 suffix=_static \
@@ -82,4 +112,4 @@ top_srcdir="$SRCROOT/ncurses" \
 srcdir="$SRCROOT/ncurses/misc" \
 /bin/sh ./run_tic.sh
 
-rm $BUILT_PRODUCTS_DIR/native/tic_static
+rm -r "$BUILT_PRODUCTS_DIR/native"
